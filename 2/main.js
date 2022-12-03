@@ -1,4 +1,4 @@
-fs = require('fs')
+utils = require('../utils.js')
 
 ROCK_PLAYED = 1
 PAPER_PLAYED = 2
@@ -34,8 +34,7 @@ var PART_2_SCORING_SYSTEM = {
 }
 
 function run(scoringSystem) {
-    return fs.readFileSync('input.txt').toString()
-        .split("\n")
+    return utils.fileToArray('input.txt')
         .map(game => scoringSystem[game])
         .reduce((a, b) => a + b )
 }

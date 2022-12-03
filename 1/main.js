@@ -1,7 +1,6 @@
-fs = require('fs')
+utils = require('../utils.js')
 
-data = fs.readFileSync('input.txt').toString()
-    .split("\n")
+data = utils.fileToArray('input.txt')
     .map((calories => parseInt(calories)))
 
 elfCalorieTotals = []

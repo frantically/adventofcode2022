@@ -1,9 +1,8 @@
-fs = require('fs')
+utils = require('../utils.js')
 
 ITEM_SCORE = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-rucksacks = fs.readFileSync('input.txt').toString()
-    .split("\n")
+rucksacks = utils.fileToArray('input.txt')
     .map(str => str.split(""))
 
 part1Score = rucksacks

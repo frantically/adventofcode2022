@@ -18,7 +18,8 @@ function initializeStacks(crateData) {
     return stacks
 }
 
-function part1(crateData, instructions) {
+function part1() {
+    var {stacks, instructions} = parseFile()
     stacks = initializeStacks(crateData)
     instructions.forEach(instruction => {
         for(let i=0;i<instruction[0];i++) {
@@ -28,8 +29,8 @@ function part1(crateData, instructions) {
     console.log(`Part 1: ${listOfTopCrates(stacks).join('')}`)
 }
 
-function part2(crateData, instructions) {
-    stacks = initializeStacks(crateData)
+function part2() {
+    var {stacks, instructions} = parseFile()
     instructions.forEach(instruction => {
         toMove = []
         for(let i=0;i<instruction[0];i++) {
@@ -57,10 +58,9 @@ function parseFile() {
     })
     crateData = crateData.reverse()
     instructions = instructionData.map(line => line.match(/move ([0-9]+) from ([0-9]+) to ([0-9]+)/).slice(1).map(x => parseInt(x)))
-    return { crateData, instructions }
+    stacks = initializeStacks(crateData)
+    return { stacks, instructions }
 }
 
-var { crateData, instructions } = parseFile()
-
-part1(crateData, instructions)
-part2(crateData, instructions)
+part1()
+part2()

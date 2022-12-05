@@ -1,3 +1,5 @@
+const { parse } = require("path")
+
 utils = require("../utils.js")
 
 function initializeStacks(crateData) {
@@ -39,26 +41,26 @@ function part2(crateData, instructions) {
 }
 
 function listOfTopCrates(stacks) {
-    result = []
-    for(let i=1;i<stacks.length;i++) {
-        result.push(stacks[i][stacks[i].length-1])
-    }
-    return result
+    return stacks.map(stack => stack[stack.length-1])
 }
 
-data = utils.fileToArray("input.txt")
-crateData = []
-instructionData = []
-data.forEach(line => {
-    if(line.startsWith("[")){
-        crateData.push(line)
-    } else if (line.startsWith("move")) {
-        instructionData.push(line)
-    }
-})
-crateData = crateData.reverse()
+function parseFile() {
+    data = utils.fileToArray("input.txt")
+    crateData = []
+    instructionData = []
+    data.forEach(line => {
+        if(line.startsWith("[")){
+            crateData.push(line)
+        } else if (line.startsWith("move")) {
+            instructionData.push(line)
+        }
+    })
+    crateData = crateData.reverse()
+    instructions = instructionData.map(line => line.match(/move ([0-9]+) from ([0-9]+) to ([0-9]+)/).slice(1).map(x => parseInt(x)))
+    return { crateData, instructions }
+}
 
-instructions = instructionData.map(line => line.match(/move ([0-9]+) from ([0-9]+) to ([0-9]+)/).slice(1).map(x => parseInt(x)))
+var { crateData, instructions } = parseFile()
 
 part1(crateData, instructions)
 part2(crateData, instructions)

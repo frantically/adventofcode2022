@@ -1,5 +1,3 @@
-const { parse } = require("path")
-
 utils = require("../utils.js")
 
 function initializeStacks(crateData) {
